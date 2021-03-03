@@ -1,6 +1,7 @@
 package employee.android.data
 
-import employee.android.data.model.LoggedInUser
+import employee.android.data.model.UserDetails
+import retrofit2.Call
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -10,8 +11,7 @@ import employee.android.data.model.LoggedInUser
 class LoginRepository(val dataSource: LoginDataSource) {
 
     // in-memory cache of the loggedInUser object
-    var user: LoggedInUser? = null
-        private set
+    var user: UserDetails? = null
 
     val isLoggedIn: Boolean
         get() = user != null
@@ -27,18 +27,12 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String, password: String): Call<UserDetails> {
         // handle login
-        val result = dataSource.login(username, password)
-
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
-
-        return result
+        return dataSource.login(username, password)
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
+    private fun setLoggedInUser(loggedInUser: UserDetails) {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
