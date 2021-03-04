@@ -1,40 +1,31 @@
 package employee.android.data
 
 import employee.android.data.model.UserDetails
+import employee.android.data.model.UserRequestDetails
+import employee.android.httpservice.LoginHttpService
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
-
-    // in-memory cache of the loggedInUser object
-    var user: UserDetails? = null
-
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-        user = null
-    }
+class LoginRepository() {
 
     fun logout() {
-        user = null
-        dataSource.logout()
+        //handle logout
     }
 
     fun login(username: String, password: String): Call<UserDetails> {
-        // handle login
-        return dataSource.login(username, password)
-    }
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.99.100:9595")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service: LoginHttpService = retrofit.create(LoginHttpService::class.java)
 
-    private fun setLoggedInUser(loggedInUser: UserDetails) {
-        this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
+        val u = UserRequestDetails(username, password)
+        return service.listRepos(u)
     }
 }

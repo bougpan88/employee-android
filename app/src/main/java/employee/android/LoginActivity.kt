@@ -1,4 +1,4 @@
-package employee.android.ui.login
+package employee.android
 
 import android.content.Context
 import android.content.Intent
@@ -15,11 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import employee.android.MainActivity
-import employee.android.R
-import employee.android.data.LoginDataSource
 import employee.android.data.LoginRepository
 import employee.android.data.model.UserDetails
+import employee.android.ui.login.LoginViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginActivityContext = this
-        loginRepository = LoginRepository(LoginDataSource())
+        loginRepository = LoginRepository()
 
         setContentView(R.layout.activity_login)
 
@@ -91,8 +89,9 @@ class LoginActivity : AppCompatActivity() {
                 call.enqueue(object : Callback<UserDetails> {
                     override fun onResponse(call: Call<UserDetails>, response: Response<UserDetails>) {
                         if (response.code() == 200) {
-                            loginRepository.user = response.body()
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            val user: UserDetails = response.body()
+                            val intent = Intent(this@LoginActivity, NavigationMenu::class.java)
+                            intent.putExtra("user", user)
                             startActivity(intent)
                             finish()
                         } else {
