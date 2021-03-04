@@ -21,10 +21,10 @@
     <string name="title_activity_navigation_menu">NavigationMenu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-<!--    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>-->
     <string name="nav_header_desc">Navigation header</string>
-
+    <string name="username">Username: %s</string>
+    <string name="user_expiration_date">Expiration Date: %s</string>
+    <string name="user_register_date">Registration date: %s</string>
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>

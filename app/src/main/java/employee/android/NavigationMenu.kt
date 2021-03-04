@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import employee.android.data.LoginRepository
 import employee.android.data.model.UserDetails
+import java.text.SimpleDateFormat
 
 class NavigationMenu : AppCompatActivity() {
 
@@ -44,13 +45,15 @@ class NavigationMenu : AppCompatActivity() {
 
         val user: UserDetails = intent.getSerializableExtra("user") as UserDetails;
 
-        val linearLayout : LinearLayout = findViewById(R.id.navigation_header)
-        val userNameTextView : TextView = linearLayout.findViewById(R.id.textViewUserName)
-        userNameTextView.text = user.username
-        val registerDateTextView : TextView = linearLayout.findViewById(R.id.textViewRegisterDate)
-        registerDateTextView.text = user.registerDate
-        val expireDateTextView : TextView = linearLayout.findViewById(R.id.textViewExpireDate)
-        expireDateTextView.text = user.accountExpire
+
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val headerView : View = navView.getHeaderView(0)
+        val userNameTextView : TextView = headerView.findViewById(R.id.textViewUserName)
+        userNameTextView.text = getString(R.string.username).format(user.username)
+        val registerDateTextView : TextView = headerView.findViewById(R.id.textViewRegisterDate)
+        registerDateTextView.text = getString(R.string.user_register_date).format(simpleDateFormat.format(user.registerDate))
+        val expireDateTextView : TextView = headerView.findViewById(R.id.textViewExpireDate)
+        expireDateTextView.text = getString(R.string.user_expiration_date).format(simpleDateFormat.format(user.accountExpire))
 
 
 
