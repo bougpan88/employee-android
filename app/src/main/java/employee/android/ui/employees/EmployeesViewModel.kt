@@ -1,13 +1,13 @@
-package employee.android.ui.home
+package employee.android.ui.employees
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class EmployeesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is employees Fragment"
     }
     val text: LiveData<String> = _text
 }

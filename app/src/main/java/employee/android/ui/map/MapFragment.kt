@@ -1,4 +1,4 @@
-package employee.android.ui.slideshow
+package employee.android.ui.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import employee.android.R
 
-class SlideshowFragment : Fragment() {
+class MapFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
+    private lateinit var mapViewModel: MapViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-                ViewModelProvider(this).get(SlideshowViewModel::class.java)
+        mapViewModel =
+                ViewModelProvider(this).get(MapViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
         val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
+        mapViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

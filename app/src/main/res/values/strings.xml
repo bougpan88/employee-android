@@ -25,7 +25,7 @@
     <string name="username">Username: %s</string>
     <string name="user_expiration_date">Expiration Date: %s</string>
     <string name="user_register_date">Registration date: %s</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_employees">Employees</string>
+    <string name="menu_attribute">Attribute</string>
+    <string name="menu_map">Map</string>
 </resources>
