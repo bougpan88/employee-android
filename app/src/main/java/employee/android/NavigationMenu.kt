@@ -1,11 +1,14 @@
 package employee.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -17,14 +20,21 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.text.HtmlCompat
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.navigation.NavController
 import employee.android.data.LoginRepository
 import employee.android.data.model.UserDetails
+import employee.android.ui.attributes.AttributeFragment
 import java.text.SimpleDateFormat
 
-class NavigationMenu : AppCompatActivity() {
+class NavigationMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +67,15 @@ class NavigationMenu : AppCompatActivity() {
 
 
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_employee, R.id.nav_attribute, R.id.nav_map), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -75,5 +87,15 @@ class NavigationMenu : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        //When is kotlin way of switch!!!
+        when(item.toString()){
+            "Employees" -> navController.navigate(R.id.EmployeesFragment)
+            "Attribute" -> navController.navigate(R.id.AttributeFragment)
+            "Map"       -> navController.navigate(R.id.MapFragment)
+        }
+        return true
     }
 }
