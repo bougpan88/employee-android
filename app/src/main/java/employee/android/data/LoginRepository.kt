@@ -20,7 +20,7 @@ class LoginRepository() {
 
     fun login(username: String, password: String): Call<UserDetails> {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.99.100:9595")
+            .baseUrl("http://172.27.80.1:9595")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service: LoginHttpService = retrofit.create(LoginHttpService::class.java)
