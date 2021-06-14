@@ -27,6 +27,9 @@
     <string name="user_expiration_date">Expiration Date: %s</string>
     <string name="user_register_date">Registration date: %s</string>
     <string name="menu_employees">Employees</string>
+    <string name="menu_employees_create">Create</string>
     <string name="menu_attribute">Attribute</string>
     <string name="menu_map">Map</string>
+    <string name="add_attribute">Add</string>
+    <string name="search_attribute">Search</string>
 </resources>

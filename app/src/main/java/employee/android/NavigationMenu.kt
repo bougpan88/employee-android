@@ -35,6 +35,7 @@ class NavigationMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController : NavController
+    private lateinit var navDrawer : DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class NavigationMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
-            val navDrawer: DrawerLayout = findViewById (R.id.drawer_layout);
+            navDrawer = findViewById (R.id.drawer_layout);
             // If the navigation drawer is not open then open it, if its already open then close it.
             if (!navDrawer.isDrawerOpen(GravityCompat.START)) navDrawer.openDrawer(GravityCompat.START);
             else navDrawer.closeDrawer(GravityCompat.END);
@@ -96,6 +97,7 @@ class NavigationMenu : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             "Attribute" -> navController.navigate(R.id.AttributeFragment)
             "Map"       -> navController.navigate(R.id.MapFragment)
         }
+        navDrawer.closeDrawer(GravityCompat.START)
         return true
     }
 }
